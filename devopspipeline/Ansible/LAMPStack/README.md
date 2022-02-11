@@ -1,23 +1,23 @@
-Step1: run apache role
+Step1: apache role
 --> setup meta/main.yml: add your name description and company.
 --> setup tasks/main.yml.
 --> setup vars/main.yml.
 --> setup handlers.
 
-Step 2: set up yml file to run apache role.
+Step 2: setup yml file to run apache role.
 lamp.yml is the yml created specifically for the roles. 
 lampall.yml has the complete scripts you run w/o creating roles
 
-Step3: set up firewall role.
+Step3: setup firewall role.
 Step4: add this role to lamp.yml and run it.
 
-Step5: set up mysql role.
+Step5: setup mysql role.
 Step6: add this role to lamp.yml and run it.
 
-Step7: set up php role.
+Step7: setup php role.
 Step8: add this role to lamp.yml and run it.
 
-Step9: set up wordpress role.
+Step9: setup wordpress role.
 Step10: add this role to lamp.yml and run it.
 
 Step11: get the IP of container and test it: IP_Host:port.
