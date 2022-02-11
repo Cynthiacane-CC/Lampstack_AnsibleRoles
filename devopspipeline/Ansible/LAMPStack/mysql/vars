@@ -1,0 +1,8 @@
+amazon_sql: mariadb
+centos_sql: mysql-server
+sql_dep: MySQL-python
+mariadb_service: mariadb
+sql_service: mysqld
+db_name: webserver
+db_user: oracle
+db_passwd: school1

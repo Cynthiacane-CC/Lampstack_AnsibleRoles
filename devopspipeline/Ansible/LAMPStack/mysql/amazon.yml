@@ -1,0 +1,22 @@
+- name: Install mysql on Amazon
+  yum: name="{{ amazon_sql }}"  state=present
+- name: Start mysql daemon
+  service: name="{{ mariadb_service }}"  state=started
+- name: mysql dependency install
+  yum: name="{{ sql_dep }}"state=present
+
+- name: Copy cnf file to target server
+  copy:
+     src: files/my.cnf #/etc/ansible/my.cnf
+     dest: /root/.my.cnf
+     remote_src: no
+- name: Create database
+  mysql_db:
+     name: "{{ db_name }}" 
+     state: present
+- name: Create database user
+  mysql_user:
+     name: "{{ db_user }}" 
+     password: "{{ db_passwd }}"
+     priv: '*.*:ALL'
+     state: present

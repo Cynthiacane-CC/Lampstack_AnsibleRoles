@@ -1,0 +1,23 @@
+# this goes under php/tasks/main.yml
+- name: Install PHP
+  yum:
+    name: "{{ item }}" #{{ php_name }} #this is how you call loop in ansible
+    state: present
+  with_items:
+    - php
+    - php-gd
+    - php-mysql
+- name: copy info.php
+  copy:
+    src: files/info.php
+    dest: /var/www/html/info.php
+    remote_src: no
+  
+  notify:
+    - restart apache
+
+#if you fo not want to use the loop do this instead
+# - name: Install PHP
+#   yum:
+#     name: ['php', 'php-gd', 'php'mysql']
+#     state: present

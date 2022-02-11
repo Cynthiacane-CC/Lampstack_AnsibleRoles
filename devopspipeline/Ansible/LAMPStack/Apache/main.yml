@@ -1,0 +1,7 @@
+# this goes under tasks>main.yml 24:30 mins video wk 23
+- name: Update the system
+  yum: name='*' state=latest
+- name: Install apache
+  yum: name={{ apache_pkg }} state=present
+- name: Start apache service
+  service: name={{ apache_service }} state=started enabled=yes

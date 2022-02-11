@@ -1,0 +1,3 @@
+wp_url: https://wordpress.org/wordpress-5.7.1.tar.gz
+dest_url: /tmp
+docRoot: /var/www/html

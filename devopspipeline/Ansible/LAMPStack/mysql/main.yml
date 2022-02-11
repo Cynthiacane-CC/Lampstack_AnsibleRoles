@@ -1,0 +1,10 @@
+# this goes under mysql/tasks/main.yml
+#tasks file for mysql
+- include_tasks: redhatcentos.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Redhat'
+- include_tasks: amazon.yml
+  when: ansible_distribution == 'Amazon' 
+
+  
+
+

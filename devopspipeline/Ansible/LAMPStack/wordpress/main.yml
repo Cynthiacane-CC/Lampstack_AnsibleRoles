@@ -1,0 +1,35 @@
+- name: Download and extract wordpress
+  unarchive:
+    src: "{{ wp_url }}" #https://wordpress.org/wordpress-5.8.3.tar.gz: for latest you need at least PHP 7.4, mariadb > 10.2 and mysql > 5.4, 
+    dest: "{{ dest_url }}" #/tmp
+    remote_src: yes
+- name: Copy Wordpress
+  copy:
+    src: "{{ dest_url }}/wordpress"  #/tmp/wordpress
+    dest: "{{ docRoot }}" #/var/www/html
+    owner: apache
+    group: apache
+    remote_src: yes  #Set to yes to indicate the archived file is already on the remote system and not local to the Ansible controller.
+  notify:
+    - restart apache
+- name: Config DB Connection
+  command: "{{ item }}"
+  with_items:
+      - cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+      - sed -i "s/^define( 'DB_NAME',./*define( 'DB_NAME', 'webserver' );/" /var/www/html/wp-config.php
+      - sed -i "s/^define( 'DB_USER',./*define( 'DB_USER', 'oracle' );/" /var/www/html/wp-config.php
+      - sed -i "s/^define( 'DB_PASSWORD',./*define( 'DB_PASSWORD', 'school1' );/" /var/www/html/wp-config.php
+  notify:
+    - restart apache
+#ansible was creating a loop w/ items below
+    # - cp "{{ docRoot }}/wp-config-sample.php" "{{ docRoot }}/wp-config.php"
+    # - sed -i "s/^define( 'DB_NAME',.*define( 'DB_NAME', 'webserver' );/" "{{ docRoot }}/wp-config.php"
+    # - sed -i "s/^define( 'DB_USER',.*define( 'DB_USER', 'oracle' );/" "{{ docRoot }}/wp-config.php"
+    # - sed -i "s/^define( 'DB_PASSWORD',.*define( 'DB_PASSWORD', 'school1' );/" "{{ docRoot }}/wp-config.php"
+  # loop_control:    
+  #   loop_var: item1
+  
+
+# handlers:
+#   - name: restart apache
+#     service: name=httpd state=restarted

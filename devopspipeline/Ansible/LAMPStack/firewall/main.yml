@@ -1,0 +1,5 @@
+# https://www.educba.com/ansible-firewalld/
+- name: here we enable http in firewall rules firewalld:
+  service: name=http state=started enabled=yes
+
+  notify: reload firewalld

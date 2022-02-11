@@ -1,0 +1,5 @@
+# this goes under main.yml 22 mins video wk 23
+- name: restart apache
+  service:
+    name: httpd
+    state: restarted
